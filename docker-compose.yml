@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+  fbevent:
+    container_name: nodefluxapidashboard
+    image: nodeflux/api-dashboard:${version}
+    build:
+      context: ./
+    ports:
+      - 5002
+    volumes:
+      - ./:/usr/src/app
+    restart: always
+    labels:
+      - traefik.http.routers.nodefluxapidashboard.entrypoints=web
+      - traefik.http.services.nodefluxapidashboard.loadbalancer.server.port=5002
+      - traefik.http.routers.nodefluxapidashboard.rule=PathPrefix(`/api-dashboard`)
+      - traefik.http.middlewares.nodefluxapidashboard.stripprefix.prefixes=/api-dashboard
+      - traefik.http.routers.nodefluxapidashboard.middlewares=nodefluxapidashboard@docker
+
+      - traefik.http.routers.nodefluxapidashboard-https.entrypoints=websecure
+      - traefik.http.routers.nodefluxapidashboard-https.tls=true
+      - traefik.http.routers.nodefluxapidashboard-https.rule=Host(`api-nodeflux.lokasi.dev`) && PathPrefix(`/api-dashboard`)
+      - traefik.http.routers.nodefluxapidashboard-https.middlewares=nodefluxapidashboard@docker
+ 
+networks:
+  default:
+    external:
+      name: li-networks

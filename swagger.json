@@ -1,0 +1,41 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Garudaeye Polri Data Streams",
+    "description": "Garudaeye Polri Data Streams",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:5002",
+  "basePath": "/",
+
+  "tags": [
+    {
+      "name": "Streams",
+      "description": "API for streams in the system"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": ["HomePage"],
+        "summary": "HomePage",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "data": "You can use this template service to create another services"
+          }
+        }
+      }
+    }
+  },
+
+  "definitions": {
+  }
+}
